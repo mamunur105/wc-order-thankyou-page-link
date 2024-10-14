@@ -2,7 +2,7 @@
 
 Contributors: mamunur105
 Donate link:
-Tags: Elementor, Woocommerce Builder, Elementor Woocommerce Builder, Woocommerce, Woocommerce Product
+Tags: Order Thank You Page Link
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

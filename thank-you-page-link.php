@@ -58,11 +58,11 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 		 * @param WC_Order $order WooCommerce order object.
 		 */
 		public function thank_you_page_metabox_callback( $order ) {
-			$order_id         = $order->get_id();
-			$order_key        = $order->get_order_key();
-			$thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
+			// $order_id         = $order->get_id();
+			// $order_key        = $order->get_order_key();
+			// $thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
 
-			echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">Visit Thank You Page</a>';
+			echo '<a class="button button-primary"  target="_blank" href="' . esc_url( $order->get_checkout_order_received_url() ) . '">Visit Thank You Page</a>';
 		}
 
 		/**
@@ -93,11 +93,11 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 		public function populate_custom_order_column( $column, $post_id ) {
 			// Yoda comparison for column check.
 			if ( 'thankyou' === $column ) {
-				$order            = wc_get_order( $post_id );
-				$order_id         = $order->get_id();
-				$order_key        = $order->get_order_key();
-				$thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
-				echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">View</a>';
+				$order = wc_get_order( $post_id );
+				// $order_id         = $order->get_id();
+				// $order_key        = $order->get_order_key();
+				// $thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
+				echo '<a class="button button-primary" target="_blank" href="' . esc_url( $order->get_checkout_order_received_url() ) . '">View</a>';
 			}
 		}
 
@@ -130,10 +130,10 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 		public function display_wc_order_list_custom_column_content( $column, $order ) {
 			switch ( $column ) {
 				case 'thankyou':
-					$order_key        = $order->get_order_key();
-					$order_id         = $order->get_id();
-					$thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
-					echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">View</a>';
+					// $order_key        = $order->get_order_key();
+					// $order_id         = $order->get_id();
+					// $thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
+					echo '<a class="button button-primary"  target="_blank" href="' . esc_url( $order->get_checkout_order_received_url() ) . '">View</a>';
 					break;
 			}
 		}
