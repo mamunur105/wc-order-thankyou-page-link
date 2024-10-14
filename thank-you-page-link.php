@@ -16,10 +16,14 @@
 
 
 if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
-
+	/**
+	 * Class.
+	 */
 	class WCOTP_Thank_You_Page_Link {
 
-		// The single instance of the class
+		/**
+		 * @var null
+		 */
 		private static $instance = null;
 
 		/**
@@ -28,6 +32,7 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 		 * @return WCOTP_Thank_You_Page_Link
 		 */
 		public static function get_instance() {
+			// Yoda comparison for null check.
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new self();
 			}
@@ -42,7 +47,7 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 			// Post Type Shop Order.
 			add_filter( 'manage_edit-shop_order_columns', [ $this, 'add_custom_order_column' ] );
 			add_action( 'manage_shop_order_posts_custom_column', [ $this, 'populate_custom_order_column' ], 10, 2 );
-			// HPOS
+			// HPOS.
 			add_filter( 'manage_woocommerce_page_wc-orders_columns', [ $this, 'add_wc_order_list_custom_columns' ] );
 			add_action( 'manage_woocommerce_page_wc-orders_custom_column', [ $this, 'display_wc_order_list_custom_column_content' ], 10, 2 );
 		}
@@ -57,7 +62,7 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 			$order_key        = $order->get_order_key();
 			$thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
 
-			echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">Visit</a>';
+			echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">Visit Thank You Page</a>';
 		}
 
 		/**
@@ -86,12 +91,13 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 		 * @param int    $post_id Post ID (Order ID).
 		 */
 		public function populate_custom_order_column( $column, $post_id ) {
+			// Yoda comparison for column check.
 			if ( 'thankyou' === $column ) {
 				$order            = wc_get_order( $post_id );
 				$order_id         = $order->get_id();
 				$order_key        = $order->get_order_key();
 				$thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
-				echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">Visit Thank You Page</a>';
+				echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">View</a>';
 			}
 		}
 
@@ -106,7 +112,8 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 			// Insert custom columns after the "Status" column.
 			foreach ( $columns as $key => $column ) {
 				$reordered_columns[ $key ] = $column;
-				if ( $key === 'order_number' ) {
+				// Yoda comparison for key check.
+				if ( 'order_number' === $key ) {
 					$reordered_columns['thankyou'] = __( 'Thank You Page Link', 'wcotp' );
 				}
 			}
@@ -118,19 +125,18 @@ if ( ! class_exists( 'WCOTP_Thank_You_Page_Link' ) ) {
 		 * Display content for custom columns in WooCommerce orders table.
 		 *
 		 * @param string $column Column key.
-		 * @param int    $order_id WooCommerce order ID.
+		 * @param int    $order WooCommerce order ID.
 		 */
 		public function display_wc_order_list_custom_column_content( $column, $order ) {
 			switch ( $column ) {
 				case 'thankyou':
 					$order_key        = $order->get_order_key();
-                    $order_id         = $order->get_id();
+					$order_id         = $order->get_id();
 					$thankYouPageLink = wc_get_checkout_url() . 'order-received/' . $order_id . '/?key=' . $order_key;
-					echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">Visit Thank You Page</a>';
+					echo '<a target="_blank" href="' . esc_url( $thankYouPageLink ) . '">View</a>';
 					break;
 			}
 		}
-
 	}
 
 	// Initialize the singleton class.
