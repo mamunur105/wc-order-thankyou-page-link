@@ -3,7 +3,7 @@
  * @wordpress-plugin
  * Plugin Name:       Order Thank You Page Link
  * Plugin URI:        https://github.com/mamunur105/wc-order-thankyou-page-link
- * Description:       Boiler
+ * Description:       Admin-side Thank-You Page Link for Orders — mainly useful during development.
  * Version:           0.0.1
  * Author:            Mamunur Rashid
  * Author URI:        https://github.com/mamunur105/
